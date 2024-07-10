@@ -1,10 +1,10 @@
-
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import pandas as pd
 import os
 import time
 import joblib
+import logging
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS
@@ -80,4 +80,5 @@ def download_file(filename):
     return send_from_directory(user_output_dir, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=6010)
+    port = int(os.environ.get('PORT', 6010))
+    app.run(debug=True, host='0.0.0.0', port=port)

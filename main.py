@@ -7,7 +7,8 @@ import joblib
 import logging
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS
+# Add 'User-Email' to the allowed headers
+CORS(app, resources={r"/*": {"origins": "*", "allow_headers": ["Content-Type", "Authorization", "User-Email"]}})
 
 # Load the trained model and vectorizer
 model = joblib.load('sub_category_model.pkl')
